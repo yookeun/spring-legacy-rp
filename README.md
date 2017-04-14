@@ -1,0 +1,1 @@
+Spring hikaricp + jndi + replication 
