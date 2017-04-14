@@ -12,7 +12,7 @@
 
 
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<!-- 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  <property name="configLocation" value="classpath:mybatis-config.xml" />
 	  <property name="mapperLocations" value="classpath:mapper/*.xml" />
 	  <property name="dataSource" ref="dataSource"/>
@@ -20,12 +20,18 @@
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 	  	<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean>		
-	
- 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	</bean>	 -->
+ 	
+ 	<bean id="dataSource_write" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:comp/env/jdbc/testdb</value>
+			<value>java:comp/env/jdbc/repldbW</value>
 		</property>
 	</bean>
 
+  	<bean id="dataSource_read" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/repldbR</value>
+		</property>
+	</bean>
+	
 </beans>
