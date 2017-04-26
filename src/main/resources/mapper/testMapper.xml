@@ -5,5 +5,20 @@
 	<select  id="selectList" resultType="testTb">
 		SELECT id, val1, val2, regdate, moddate FROM test_tb
 	</select>    
+	
+	<insert id="insertTestTb" parameterType="testTb">
+		INSERT INTO test_tb(val1, val2, regdate, moddate) VALUES(#{val1}, #{val2}, NOW(), NOW())
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<select id="selectOneId" parameterType="int" resultType="testTb">
+		SELECT id, val1, val2, regdate FROM test_tb where id = #{id}
+	</select>	
+	
+	<delete id="deleteAll">
+		DELETE FROM test_tb
+	</delete>
 
 </mapper>

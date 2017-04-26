@@ -36,11 +36,34 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("list", service.selectList());
-		
-		logger.info(service.selectList().toString());
+		model.addAttribute("listR", service.selectListR());
+		model.addAttribute("listW", service.selectListW());
 		
 		return "home";
 	}
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insert(Locale locale, Model model) {
+		TestTb testTb = new TestTb();
+		testTb.setVal1("val55");
+		testTb.setVal2("val66");
+	
+		service.insertTestTb(testTb);		
+		try {
+			service.selectOneId(testTb.getId());	
+			logger.info(">>> INSERT ID ==> {}", testTb.getId());
+		} catch (Exception e) {
+			logger.error(">>>>> EXIST NOT ID ==> {}", e.toString());
+		}
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/deleteAll", method = RequestMethod.GET)
+	public String deleteAll(Locale locale, Model model) {
+		service.deleteAll();
+		return "redirect:/";
+	}	
+	
+	
 	
 }
